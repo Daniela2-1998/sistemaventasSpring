@@ -1,0 +1,10 @@
+#spring.application.name=servidorEureka
+spring:
+  application:
+    name: eureka-serverp
+server:
+  port: 8761
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
