@@ -4,10 +4,10 @@ spring:
     name: sistemaventas
 
   datasource:
-    url: jdbc:postgresql://localhost:5432//sistemaventas
+    url: jdbc:postgresql://localhost:5432/sistemaventas
+    jdbcUrl: url
     username: daniela
     password: 123456
-    driver-class-name: org.postgresql.Driver
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -33,7 +33,3 @@ eureka:
     instance:
       preferIpAddress: true
 
-dolarapi:
-  url: https://dolarapi.com/v1/dolares
-  connection-timeout: 5000
-  read-timeout: 5000
