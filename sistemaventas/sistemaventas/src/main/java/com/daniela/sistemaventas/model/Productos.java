@@ -25,7 +25,6 @@ public class Productos {
 
     private Double precio;
 
-
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categorias categoria;
