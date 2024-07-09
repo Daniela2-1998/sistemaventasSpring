@@ -1,5 +1,6 @@
 package com.daniela.sistemaventas.repository;
 
+import com.daniela.sistemaventas.dto.response.ProductosResponseDto;
 import com.daniela.sistemaventas.model.Categorias;
 import com.daniela.sistemaventas.model.Marcas;
 import com.daniela.sistemaventas.model.Productos;
