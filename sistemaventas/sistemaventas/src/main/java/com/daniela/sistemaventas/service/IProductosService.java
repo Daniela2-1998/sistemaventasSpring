@@ -13,7 +13,7 @@ public interface IProductosService {
 
     ProductosResponseDto getProductById(Long id);
 
-    ProductosResponseDto addProduct(ProductosRequestDto productosRequestDto, Long marcaId, Long categoriaId);
+    ProductosResponseDto addProduct(ProductosRequestDto productosRequestDto);
 
     ProductosResponseDto editProduct(ProductosConIdRequestDto productosConIdRequestDto);
 

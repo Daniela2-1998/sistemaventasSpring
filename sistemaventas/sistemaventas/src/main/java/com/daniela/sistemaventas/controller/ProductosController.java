@@ -20,6 +20,7 @@ public class ProductosController {
     @Autowired
     ProductosServiceImpl productosService;
 
+
     @CrossOrigin
     @GetMapping("")
     public ResponseEntity<List<ProductosResponseDto>> getAllProductos(){
@@ -32,9 +33,8 @@ public class ProductosController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<ProductosResponseDto> createProducto(@RequestBody @Valid ProductosRequestDto productosRequestDto,
-                                                               @RequestParam Long marcaId, @RequestParam Long categoriaId){
-        return new ResponseEntity<>(productosService.addProduct(productosRequestDto, marcaId, categoriaId), HttpStatus.CREATED);
+    public ResponseEntity<ProductosResponseDto> createProducto(@RequestBody @Valid ProductosRequestDto productosRequestDto){
+        return new ResponseEntity<>(productosService.addProduct(productosRequestDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/actualizar")

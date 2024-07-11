@@ -2,15 +2,14 @@ package com.daniela.sistemaventas.dto.request;
 
 import com.daniela.sistemaventas.model.Categorias;
 import com.daniela.sistemaventas.model.Marcas;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 
 @AllArgsConstructor
@@ -21,6 +20,11 @@ public class ProductosRequestDto {
     @NotNull(message = "El campo nombre de producto no puede ser nulo.")
     @NotEmpty(message = "El campo nombre de producto no puede estar vacío.")
     private String nombre;
+
+    @NotNull(message = "El campo descripción de producto no puede ser nulo.")
+    @NotEmpty(message = "El campo descripción de producto no puede estar vacío.")
+    @Column(length = 1000)
+    private String descripcion;
 
     @NotNull(message = "El campo cantidad de producto no puede ser nulo.")
     @PositiveOrZero

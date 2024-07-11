@@ -5,6 +5,7 @@ import com.daniela.sistemaventas.dto.request.CategoriasRequestDto;
 import com.daniela.sistemaventas.dto.response.CategoriasResponseDto;
 import com.daniela.sistemaventas.dto.response.MensajeRespondeDto;
 import com.daniela.sistemaventas.service.CategoriasServiceImpl;
+import com.daniela.sistemaventas.service.ICategoriasService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,15 @@ import java.util.List;
 public class CategoriasController {
 
     @Autowired
-    CategoriasServiceImpl categoriasService;
+    ICategoriasService categoriasService;
 
 
+    public CategoriasController(CategoriasServiceImpl categoriasImp) {
+        this.categoriasService = categoriasImp;
+    }
+
+
+    
     @GetMapping("")
     public ResponseEntity<List<CategoriasResponseDto>> getAllCategorias() {
         return new ResponseEntity<>(categoriasService.getAllCategorias(), HttpStatus.OK);
@@ -33,7 +40,7 @@ public class CategoriasController {
 
     @PostMapping("/agregar")
     public ResponseEntity<CategoriasResponseDto> createCategorias(@RequestBody @Valid CategoriasRequestDto categoriasRequestDto) {
-        return new ResponseEntity<>(categoriasService.addCategoria(categoriasRequestDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(categoriasService.addCategoria(categoriasRequestDto), HttpStatus.OK);
     }
 
     @PutMapping("/actualizar")

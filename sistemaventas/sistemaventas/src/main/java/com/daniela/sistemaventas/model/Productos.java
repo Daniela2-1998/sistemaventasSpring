@@ -21,6 +21,8 @@ public class Productos {
 
     private String nombre;
 
+    private String descripcion;
+
     private Integer cantidad;
 
     private Double precio;
@@ -36,8 +38,10 @@ public class Productos {
 
 
     // Constructor
-    public Productos(String nombre, Integer cantidad, Double precio, Categorias categoria, Marcas marca) {
+
+    public Productos(String nombre, String descripcion, Integer cantidad, Double precio, Categorias categoria, Marcas marca) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precio = precio;
         this.categoria = categoria;
@@ -59,6 +63,14 @@ public class Productos {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Integer getCantidad() {

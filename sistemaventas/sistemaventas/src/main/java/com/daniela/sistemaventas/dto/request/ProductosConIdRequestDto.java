@@ -2,6 +2,7 @@ package com.daniela.sistemaventas.dto.request;
 
 import com.daniela.sistemaventas.model.Categorias;
 import com.daniela.sistemaventas.model.Marcas;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +23,11 @@ public class ProductosConIdRequestDto {
     @NotNull(message = "El campo nombre de producto no puede ser nulo.")
     @NotEmpty(message = "El campo nombre de producto no puede estar vacío.")
     private String nombre;
+
+    @NotNull(message = "El campo descripción de producto no puede ser nulo.")
+    @NotEmpty(message = "El campo descripción de producto no puede estar vacío.")
+    @Column(length = 1000)
+    private String descripcion;
 
     @NotNull(message = "El campo cantidad de producto no puede ser nulo.")
     @PositiveOrZero

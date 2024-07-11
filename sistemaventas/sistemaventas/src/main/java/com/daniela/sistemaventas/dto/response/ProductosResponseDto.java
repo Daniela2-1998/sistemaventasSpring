@@ -18,6 +18,8 @@ public class ProductosResponseDto {
 
     private String nombre;
 
+    private String descripcion;
+
     private Integer cantidad;
 
     private Double precio;

@@ -16,6 +16,8 @@ public class ProductosSinCategoriaResponseDto {
 
     private String nombre;
 
+    private String descripcion;
+
     private Integer cantidad;
 
     private Double precio;
