@@ -10,7 +10,7 @@ spring:
     password: 123456
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: 54
     hibernate:
       ddl-auto: update
     show-sql: true
