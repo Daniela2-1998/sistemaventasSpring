@@ -7,6 +7,8 @@
         <option value="$PROJECT_DIR$/sistemaVentas/sistemaVentas/pom.xml" />
         <option value="$PROJECT_DIR$/servidorEureka/servidorEureka/pom.xml" />
         <option value="$PROJECT_DIR$/sistemaventas/sistemaventas/pom.xml" />
+        <option value="$PROJECT_DIR$/registrosSistemaVentas/pom.xml" />
+        <option value="$PROJECT_DIR$/comprasSistemaVentas/pom.xml" />
       </list>
     </option>
   </component>

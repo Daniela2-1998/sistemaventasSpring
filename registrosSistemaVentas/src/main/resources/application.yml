@@ -1,7 +1,7 @@
 #spring.application.name=sistemaventas
 spring:
   application:
-    name: sistemaventas
+    name: registros
 
   datasource:
     url: jdbc:postgresql://localhost:5432/sistemaventas
@@ -24,7 +24,7 @@ spring:
       enabled: true
 
 server:
-  port: 5050
+  port: 5051
 
 eureka:
   client:

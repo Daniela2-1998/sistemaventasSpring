@@ -3,13 +3,10 @@ package com.daniela.sistemaventas.dto.request;
 import com.daniela.sistemaventas.model.Categorias;
 import com.daniela.sistemaventas.model.Marcas;
 import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 
 @AllArgsConstructor

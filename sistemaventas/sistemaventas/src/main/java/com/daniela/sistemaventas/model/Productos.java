@@ -38,7 +38,6 @@ public class Productos {
 
 
     // Constructor
-
     public Productos(String nombre, String descripcion, Integer cantidad, Double precio, Categorias categoria, Marcas marca) {
         this.nombre = nombre;
         this.descripcion = descripcion;

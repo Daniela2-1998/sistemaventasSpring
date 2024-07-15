@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ComprasSistemaVentas" />
         <module name="servidorEureka" />
+        <module name="RegistrosSistemaVentas" />
         <module name="sistemaventas" />
       </profile>
     </annotationProcessing>
@@ -16,6 +18,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ComprasSistemaVentas" options="-parameters" />
+      <module name="RegistrosSistemaVentas" options="-parameters" />
       <module name="servidorEureka" options="-parameters" />
       <module name="sistemaVentas" options="-parameters" />
       <module name="sistemaventas" options="-parameters" />
