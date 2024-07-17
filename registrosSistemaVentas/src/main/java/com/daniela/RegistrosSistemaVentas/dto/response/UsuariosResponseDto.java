@@ -22,5 +22,5 @@ public class UsuariosResponseDto {
 
     private Usuarios.Rol rol;
 
-    private String estado;
+    private Usuarios.Estado estado;
 }

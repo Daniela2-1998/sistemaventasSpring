@@ -12,11 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "usuarios")
-public class Usuarios {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Usuarios extends RegistrosBase{
 
     private String nombreUsuario;
 
@@ -26,32 +22,21 @@ public class Usuarios {
 
     private Rol rol;
 
-    private String estado;
+    private Estado estado;
 
 
-    // Creación de rol.
+    // Creación de rol y estado.
     public enum Rol {
         VISITANTE, EMPLEADO, ADMINISTRADOR
     }
 
-    // Constructor
-    public Usuarios(String contraseña, String mail, String nombreUsuario, Rol rol, String estado) {
-        this.contraseña = contraseña;
-        this.mail = mail;
-        this.nombreUsuario = nombreUsuario;
-        this.rol = rol;
-        this.estado = estado;
+    public enum Estado {
+        ACTIVO, INACTIVO, SUSPENDIDO
     }
+
+
 
     // Getters y setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -84,11 +69,11 @@ public class Usuarios {
         this.rol = rol;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }

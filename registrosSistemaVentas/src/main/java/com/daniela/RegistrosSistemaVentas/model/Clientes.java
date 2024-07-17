@@ -34,17 +34,6 @@ public class Clientes extends RegistrosBase{
         INDIVIDUAL, CORPORATIVO
     }
 
-
-    // Constructor
-    public Clientes(String nombre, LocalDate fechaNacimiento, String dni, String telefono, String direccion, TipoCliente tipo) {
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.tipo = tipo;
-    }
-
     // Getters y setters
     public String getNombre() {
         return nombre;

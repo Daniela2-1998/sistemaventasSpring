@@ -3,7 +3,6 @@ package com.daniela.sistemaventas.service;
 import com.daniela.sistemaventas.dto.request.CategoriasConIdRequestDto;
 import com.daniela.sistemaventas.dto.request.CategoriasRequestDto;
 import com.daniela.sistemaventas.dto.response.CategoriasResponseDto;
-import com.daniela.sistemaventas.dto.response.MarcasResponseDto;
 import com.daniela.sistemaventas.dto.response.MensajeRespondeDto;
 
 import java.util.List;

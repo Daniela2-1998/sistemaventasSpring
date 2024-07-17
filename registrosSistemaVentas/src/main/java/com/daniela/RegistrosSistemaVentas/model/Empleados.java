@@ -14,11 +14,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @Table(name = "empleados")
-public class Empleados {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Empleados extends RegistrosBase {
 
     private String nombreCompleto;
 
@@ -35,26 +31,7 @@ public class Empleados {
     private Usuarios usuario;
 
 
-    // Constructor
-    public Empleados(String nombreCompleto, LocalDate fechaNacimiento, String cargo, String telefono, Double salario, Usuarios usuario) {
-        this.nombreCompleto = nombreCompleto;
-        this.fechaNacimiento = fechaNacimiento;
-        this.cargo = cargo;
-        this.telefono = telefono;
-        this.salario = salario;
-        this.usuario = usuario;
-    }
-
-
     // Getters y setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNombreCompleto() {
         return nombreCompleto;
     }
