@@ -12,17 +12,37 @@
 - [Descripción del Proyecto](#-descripción-del-proyecto)
 - [Tecnologías Utilizadas](#-tecnologías-utilizadas)
 - [Objetivos](#-objetivos)
+- [Requisitos Previos](#-requisitos-previos)
 - [Instalación](#-instalación)
 - [Uso de APIs](#-uso-de-apis)
+  - [Configuración de la Base de Datos](#️-configuración-de-la-base-de-datos)
 - [Microservicios](#-microservicios)
 - [Servidor Eureka](#-servidor-eureka)
-- [Sistema de ventas productos](#-servidor-de-ventas-productos)
+  - [Configuración de servidores](#️-configuración-de-servidores)
+  - [Pasos para configurar un servidor propio](#pasos-para-configurar-un-servidor-propio)
+- [Sistema de ventas productos](#-sistema-de-ventas-productos)
+  - [Métodos y endpoints](#métodos-y-endpoints)
+  - [Productos](#productos)
+  - [Marcas y categorías](#marcas-y-categorías)
+- [Sistema de registros](#-sistema-de-registros)
+  - [Métodos y endpoints](#métodos-y-endpoints-1)
+  - [Usuarios](#usuarios)
+  - [Empleados](#empleados)
+  - [Proveedores](#proveedores)
+  - [Clientes](#clientes)
+- [Solución de Problemas](#-solución-de-problemas)
+- [Pasos para configurar una API](#pasos-para-configurar-una-api)
 - [Contacto](#-contacto)
 - [Licencia](#-licencia)
+- [Agradecimientos](#-agradecimientos)
+
+
 
 ## 💼 Descripción del Proyecto
 
-Este sistema de ventas está desarrollado bajo una arquitectura de microservicios, dividida en varios subproyectos. Esta estructura facilita la organización, dinamismo y funcionalidad del código al separar responsabilidades según temática y función.
+Este sistema de ventas está desarrollado bajo una arquitectura de microservicios, dividida en varios subproyectos. Esta estructura facilita la organización, dinamismo y funcionalidad del código al separar responsabilidades según temática y función. El sistema de ventas surje ante la necesidad de empresas, tiendas, negocios y emprendimientos, de utilizar un sistema de gestión de negocio múltiple que 
+permita gestionar los productos, marcas, categorías, stock, operaciones (compra, venta, importación, exportación, logística, contrato de empleados, reapraciones), usuarios, empleados, clientes, 
+proveedores y la contabilidad (ingresos, egresos, gastos varios). 
 
 ## 🛠 Tecnologías Utilizadas
 
@@ -53,12 +73,32 @@ Este sistema de ventas está desarrollado bajo una arquitectura de microservicio
 
 5. Ejecuta `mvn clean install` en la raíz del proyecto para instalar las dependencias.
 
+Otra forma sencilla de clonarlo es desde la Git bash:
+1. Clona el repositorio: git clone [https://github.com/Daniela2-1998/sistemaventasSpring](https://github.com/Daniela2-1998/sistemaventasSpring)
+2. Navega al directorio del proyecto: `cd sistema-ventas-microservicios`
+3. Compila el proyecto: `mvn clean install`
+
+## 📋 Requisitos Previos
+Antes de comenzar, asegúrate de tener instalado:
+
+- JDK 17 o superior
+- Maven 3.8.4 o superior
+- PostgreSQL 14
+- Docker (opcional, para contenerización)
+
 ## 📚 Uso de APIs
 
 Se recomienda acceder a la documentación Swagger correspondiente para cada API:
 
 - **Sistema ventas:** [http://localhost:5050/swagger-ui/index.html#/](http://localhost:5050/swagger-ui/index.html#/)
 - **Registros sistema de ventas:** [http://localhost:5051/swagger-ui/index.html#/](http://localhost:5051/swagger-ui/index.html#/)
+
+### ⚙️ Configuración de la Base de Datos
+1. Crea una base de datos en PostgreSQL:
+```
+CREATE DATABASE sistemaventas;
+```
+2. Actualiza las credenciales de la base de datos en application.yml de cada microservicio.
 
 ## 🔗 Microservicios
 
@@ -120,27 +160,448 @@ Añade la anotación ```@EnableEurekaServer``` en la clase principal de la aplic
 Como se mencionó previamente, se trata de un sistema que gestiona los productos de un negocio, empresa o tienda, de forma tal que se puedan incluir y modificar detalles adicionales como 
 la marca y la categoría de un producto para una mejor distinción y una mejor busqueda por filtros.
 
-Este sistema trabaja con el puerto ```5051``` - [localhost:5051/productos](http://localhost:5051/productos).
+Este sistema trabaja con el puerto ```5050``` - [localhost:5050/productos](http://localhost:5050/productos).
 > [!IMPORTANT]
 > Además de productos, actualmente se puede acceder a categorias y marcas, debiendo cambiar la palabra "productos" por la correspondiente.
 > De momento es un sistema sencillo que cumple con las funciones básicas de un CRUD.
  
 #### Métodos y endpoints
 Antes que nada, vuelvo a mencionar la importancia de acceder y leer el Swagger para un mejor entendimiento del proyecto: 
+[http://localhost:5050/swagger-ui/index.html#/](http://localhost:5050/swagger-ui/index.html#/)
+
+```
+ PRODUCTOS:
+    GET:
+       - http://localhost:5050/productos
+       - http://localhost:5050/productos/{ID}
+    POST:
+        - http://localhost:5050/productos/agregar
+    PUT:
+        - http://localhost:5050/productos/actualizar
+    DELETE:
+        - http://localhost:5050/productos/eliminar/{ID}
+```
+
+```
+ MARCAS:
+    GET:
+       - http://localhost:5050/marcas
+       - http://localhost:5050/marcas/{ID}
+    POST:
+        - http://localhost:5050/marcas/agregar
+    PUT:
+        - http://localhost:5050/marcas/actualizar
+    DELETE:
+        - http://localhost:5050/marcas/eliminar/{ID}
+```
+
+```
+ CATEGORIAS:
+    GET:
+       - http://localhost:5050/categorias
+       - http://localhost:5050/categorias/{ID}
+    POST:
+        - http://localhost:5050/categorias/agregar
+    PUT:
+        - http://localhost:5050/categorias/actualizar
+    DELETE:
+        - http://localhost:5050/categorias/eliminar/{ID}
+```
+
+#### Productos:
+```
+GET
+[
+  {
+    "id": 0,
+    "nombre": "string",
+    "descripcion": "string",
+    "cantidad": 0,
+    "precio": 0,
+    "categoria": {
+      "id": 0,
+      "nombre": "string"
+    },
+    "marca": {
+      "id": 0,
+      "nombre": "string"
+    }
+  }
+]
+```
+
+```
+POST
+{
+  "nombre": "string",
+  "descripcion": "string",
+  "cantidad": 0,
+  "precio": 0,
+  "categoria": {
+    "id": 0,
+    "nombre": "string"
+  },
+  "marca": {
+    "id": 0,
+    "nombre": "string"
+  }
+}
+```
+
+```
+PUT
+{
+  "id": 0,
+  "nombre": "string",
+  "descripcion": "string",
+  "cantidad": 0,
+  "precio": 0,
+  "categoria": {
+    "id": 0,
+    "nombre": "string"
+  },
+  "marca": {
+    "id": 0,
+    "nombre": "string"
+  }
+}
+```
+
+#### Marcas y categorías
+```
+GET
+[
+  {
+    "id": 0,
+    "nombre": "string"
+  }
+]
+```
+
+```
+POST
+{
+  "nombre": "string"
+}
+```
+
+## 🖥 Sistema de registros
+Como se mencionó previamente, se trata de un sistema que gestiona los registros personales, es decir, de usuarios, empleados, clientes y proveedores de una tienda, local, negocio, mercado o emprendimiento. 
+Los empleados registrados deben vincularse a un usuario previamente ingresado en el sistema. Se trata de un proyecto experimental más robusto que el anterior ya que incluye una APIResponse para devolver respuestas personalizadas en los endpoints determinados y devolver un HttpStatus adecuado, el uso de Logs como practica y comprobación del funcionamiento, paginación para la devolución de todos los registros
+en el método GET ALL, y uso de IA para sugerencias y mejores practicas. 
+
+Este sistema trabaja con el puerto ```5051``` - [localhost:5051/usuarios](http://localhost:5051/usuarios).
+
+> [!IMPORTANT]
+> De momento es un sistema sencillo que cumple con las funciones básicas de un CRUD.
+ 
+#### Métodos y endpoints
+Antes que nada, vuelvo a mencionar la importancia de acceder y leer el Swagger para un mejor entendimiento del proyecto: 
 [http://localhost:5051/swagger-ui/index.html#/](http://localhost:5051/swagger-ui/index.html#/)
 
-```postman
- PRODUCTOS:
-GET:
-   - http://localhost:5050/productos
-   - http://localhost:5050/productos/{ID}
-POST:
-   - http://localhost:5050/productos/agregar
-PUT:
-   - http://localhost:5050/productos/actualizar
-DELETE:
-   -http://localhost:5050/productos/eliminar/{ID}
 ```
+ USUARIOS:
+    GET:
+       - http://localhost:5051/usuarios
+       - http://localhost:5051/usuarios/{ID}
+    POST:
+        - http://localhost:5051/usuarios/agregar
+    PUT:
+        - http://localhost:5051/usuarios/actualizar
+    DELETE:
+        - http://localhost:5051/usuarios/eliminar/{ID}
+```
+
+```
+ EMPLEADOS:
+    GET:
+       - http://localhost:5051/emoleados
+       - http://localhost:5051/emoleados/{ID}
+    POST:
+        - http://localhost:5051/emoleados/agregar
+    PUT:
+        - http://localhost:5051/emoleados/actualizar
+    DELETE:
+        - http://localhost:5051/emoleados/eliminar/{ID}
+```
+
+```
+ CLIENTS:
+    GET:
+       - http://localhost:5051/clientes
+       - http://localhost:5051/clientes/{ID}
+    POST:
+        - http://localhost:5051/clientes/agregar
+    PUT:
+        - http://localhost:5051/clientes/actualizar
+    DELETE:
+        - http://localhost:5051/clientes/eliminar/{ID}
+```
+
+```
+ PROVEEDORES:
+    GET:
+       - http://localhost:5051/proveedores
+       - http://localhost:5051/proveedores/{ID}
+    POST:
+        - http://localhost:5051/proveedores/agregar
+    PUT:
+        - http://localhost:5051/proveedores/actualizar
+    DELETE:
+        - http://localhost:5051/uproveedores/eliminar/{ID}
+```
+
+#### Usuarios:
+```
+GET
+[
+  {
+    "id": 0,
+    "nombreUsuario": "string",
+    "contraseña": "string",
+    "mail": "string",
+    "rol": "VISITANTE",
+    "estado": "ACTIVO"
+  }
+]
+```
+
+```
+POST
+{
+  "nombreUsuario": "string",
+  "contraseña": "c}d1e/ YypL[%<s",
+  "mail": "string",
+  "rol": "VISITANTE",
+  "estado": "ACTIVO"
+}
+```
+```
+PUT
+{
+  "id": 0,
+  "nombreUsuario": "string",
+  "contraseña": "O%2+LKp>{,kSRm&",
+  "mail": "string",
+  "rol": "VISITANTE",
+  "estado": "ACTIVO"
+}
+```
+
+#### Empleados:
+```
+GET
+{
+  "totalPages": 0,
+  "totalElements": 0,
+  "first": true,
+  "last": true,
+  "size": 0,
+  "content": [
+    {
+      "id": 0,
+      "nombreCompleto": "string",
+      "fechaNacimiento": "2024-07-18",
+      "cargo": "string",
+      "telefono": "string",
+      "salario": 0,
+      "usuario": {
+        "id": 0,
+        "nombreUsuario": "string",
+        "contraseña": "string",
+        "mail": "string",
+        "rol": "VISITANTE",
+        "estado": "ACTIVO"
+      }
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "pageNumber": 0,
+    "pageSize": 0,
+    "unpaged": true
+  },
+  "empty": true
+}
+```
+
+```
+POST
+{
+  "nombreCompleto": "string",
+  "fechaNacimiento": "2024-07-18",
+  "cargo": "string",
+  "telefono": "677299643",
+  "salario": 0,
+  "usuario": {
+    "id": 0,
+    "nombreUsuario": "string",
+    "contraseña": "string",
+    "mail": "string",
+    "rol": "VISITANTE",
+    "estado": "ACTIVO"
+  }
+}
+```
+
+```
+PUT
+{
+  "id": 0,
+  "nombreCompleto": "string",
+  "fechaNacimiento": "2024-07-18",
+  "cargo": "string",
+  "telefono": "372605211",
+  "salario": 0,
+  "usuario": {
+    "id": 0,
+    "nombreUsuario": "string",
+    "contraseña": "string",
+    "mail": "string",
+    "rol": "VISITANTE",
+    "estado": "ACTIVO"
+  }
+}
+```
+
+#### Proveedores:
+```
+GET
+[
+  {
+    "id": 0,
+    "empresa": "string",
+    "identificacion": "string",
+    "mail": "string",
+    "telefono": "string",
+    "direccion": "string",
+    "contacto": "string",
+    "tipo": "PRODUCTOS",
+    "descripcion": "string",
+    "fechaRegistro": "2024-07-18"
+  }
+]
+```
+
+```
+POST
+{
+  "empresa": "string",
+  "identificacion": "string",
+  "mail": "string",
+  "telefono": "97636663953",
+  "direccion": "string",
+  "contacto": "string",
+  "tipo": "PRODUCTOS",
+  "descripcion": "string",
+  "fechaRegistro": "2024-07-18"
+}
+```
+
+```
+PUT
+{
+  "id": 0,
+  "empresa": "string",
+  "identificacion": "string",
+  "mail": "string",
+  "telefono": "+709322653",
+  "direccion": "string",
+  "contacto": "string",
+  "tipo": "PRODUCTOS",
+  "descripcion": "string",
+  "fechaRegistro": "2024-07-18"
+}
+```
+
+#### Clientes:
+```
+GET
+{
+  "totalPages": 0,
+  "totalElements": 0,
+  "first": true,
+  "last": true,
+  "size": 0,
+  "content": [
+    {
+      "id": 0,
+      "nombre": "string",
+      "fechaNacimiento": "2024-07-18",
+      "dni": "string",
+      "telefono": "string",
+      "direccion": "string",
+      "tipo": "INDIVIDUAL"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "pageNumber": 0,
+    "pageSize": 0,
+    "unpaged": true
+  },
+  "empty": true
+}
+```
+
+```
+POST
+{
+  "nombre": "string",
+  "fechaNacimiento": "2024-07-18",
+  "dni": "string",
+  "telefono": "117142864",
+  "direccion": "string",
+  "tipo": "INDIVIDUAL"
+}
+```
+
+```
+PUT
+{
+  "id": 0,
+  "nombre": "string",
+  "fechaNacimiento": "2024-07-18",
+  "dni": "string",
+  "telefono": "25133293039",
+  "direccion": "string",
+  "tipo": "INDIVIDUAL"
+}
+```
+
+
+## 🔧 Solución de Problemas
+### Problema: No se puede conectar a Eureka Server
+Solución: Verifica que Eureka Server esté en ejecución y que la configuración en application.yml sea correcta.
+
+### Problema: Error al iniciar un microservicio
+Solución: Asegúrate de que la base de datos esté en funcionamiento y las credenciales sean correctas.
 
 ### Pasos para configurar una API
 Cada API es diferente y necesita diferentes dependencias para funcionar, pero en el caso de esta API, fue necesario incluir las siguientes dependencias en el **pom.xml**:
@@ -245,9 +706,13 @@ eureka:
 ```
 Y finalmente, en cada API se incluye la anotación ```@EnableDiscoveryClient``` dentro del application.class.
 
-
 ## 📞 Contacto
 Para cualquier pregunta o sugerencia, por favor abre un issue en este repositorio.
 
 ## 📄 Licencia
 Este proyecto está bajo la Licencia MIT. Ver el archivo LICENSE para más detalles.
+
+## 🙏 Agradecimientos
+- Spring Boot por el framework
+- PostgreSQL por el sistema de gestión de base de datos
+- GitLab duo chat por las sugerencias, recomendaciones y agilizar el trabajo
